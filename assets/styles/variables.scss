@@ -1,0 +1,18 @@
+// SCSS Variables
+$paleBlue: rgba(221, 227, 234, 1);
+$white: rgba(255, 255, 255, 1);
+$black: rgba(0, 0, 0, 1);
+$deepBlue: rgba(0, 102, 245, 1);
+$paleBlack: rgba(0, 0, 0, 0.05);
+$navyBlue: rgba(8, 37, 82, 1);
+$openSans: "Open Sans", sans-serif;
+
+
+// Mixin for flexbox
+@mixin flexboxWrap($direction, $justify, $align) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}

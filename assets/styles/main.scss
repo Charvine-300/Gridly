@@ -1,0 +1,11 @@
+@import './variables.scss';
+
+* {
+    outline: none !important;
+}
+
+body {
+    margin: 0;
+    background-color: $white;
+    font-family: "Open Sans", sans-serif;
+}
