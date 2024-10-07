@@ -60,7 +60,7 @@ export const usePhotoStore = defineStore('Photos', {
         // Condition to load more or change results
         const mergedArray = [...existingPhotos, ...response.data.results];
         this.photos = more ? mergedArray : response.data.results;
-        console.log(mergedArray, ...this.photos);
+        // console.log(mergedArray, ...this.photos);
 
         if (term) {
           this.searchResultsHeading = `Search results for <span style="color: rgb(143, 164, 188); text-transform: capitalize;">"${term}"</span>`;

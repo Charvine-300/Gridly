@@ -1,11 +1,3 @@
-export interface PhotoStoreInterface {
-    id: string;
-    img: string;
-    fullImg: string;
-    name: string;
-    location: string;
-}
-
 export interface PhotosInterface {
     id: string;
     created_at: string;
@@ -27,6 +19,8 @@ export interface PhotosInterface {
     id: string;
     username: string;
     name: string;
+    first_name: string;
+    last_name: string;
     portfolio_url: string;
     bio: string;
     location: string;

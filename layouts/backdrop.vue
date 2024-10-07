@@ -1,4 +1,5 @@
 <template>
+    <Download />
     <div class="app-container">
         <Header />
         <Search />
@@ -9,6 +10,7 @@
 <script setup lang="ts">
 import Header from '~/components/Header.vue';
 import Search from '~/components/Search.vue';
+import Download from '~/components/Download.vue';
 
 </script>
 
