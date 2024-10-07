@@ -1,5 +1,4 @@
 import axios from "axios";
-import type { PhotoStoreInterface } from "~/utils/types";
 
 interface PhotoStore {
   showSearchbar: boolean;
@@ -8,7 +7,7 @@ interface PhotoStore {
   perPage: number;
   loading: boolean;
   searchResultsHeading: string;
-  photos: PhotoStoreInterface[];
+  photos: PhotosInterface[];
   total: number;
 }
 
@@ -54,16 +53,14 @@ export const usePhotoStore = defineStore('Photos', {
 
         // Filter for necessary data
         // TODO - Fix issue with appending
-        const fetchedPhotos =  response.data.results.map((item: PhotosInterface) => {
-          return {
-            id: item.id,
-            img: item.urls.small,
-            fullImg: item.urls.regular
-          };
+        const existingPhotos = this.photos.map((photo) => {
+          return JSON.parse(JSON.stringify(photo)); // Resolving the proxy
         });
 
         // Condition to load more or change results
-        this.photos = more ? [...this.photos, ...fetchedPhotos] : fetchedPhotos;
+        const mergedArray = [...existingPhotos, ...response.data.results];
+        this.photos = more ? mergedArray : response.data.results;
+        console.log(mergedArray, ...this.photos);
 
         if (term) {
           this.searchResultsHeading = `Search results for <span style="color: rgb(143, 164, 188); text-transform: capitalize;">"${term}"</span>`;
@@ -83,7 +80,7 @@ export const usePhotoStore = defineStore('Photos', {
     },
     async loadMore() {
       this.page += 1;
-
+// TODO - Fix issue of search term being passed
       this.fetchPhotos(undefined, true);
     }
   },

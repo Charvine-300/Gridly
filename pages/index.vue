@@ -1,7 +1,7 @@
 <template>
     <div class="grid-container">
       <div class="masonry">
-<img :src="item.img" alt="" v-for="item in photos" :key="item.id" />
+<img :src="item.urls.small" alt="" v-for="item in photos" :key="item.id" loading="lazy" />
       </div>
       <div v-if="photos.length > 0 && photos.length < total">
         <button class="load-more" @click="photoStore.loadMore"> Load more </button>
