@@ -24,8 +24,11 @@ export default defineEventHandler(async (event) => {
     // Return the data received from the API
     return response.data;
   } catch (error) {
-    console.error('Error fetching data from Unsplash:', error);
-    return { error: 'Failed to fetch data from Unsplash' };
+    // Set the response status code to 400 in case of an error
+    event.res.statusCode = 400;
+    const errorMessage = (error as Error).message || 'Failed to fetch data from Unsplash';
+
+    return { error: errorMessage };
   }
 
 

@@ -6,6 +6,7 @@ $deepBlue: rgba(0, 102, 245, 1);
 $paleBlack: rgba(0, 0, 0, 0.05);
 $navyBlue: rgba(8, 37, 82, 1);
 $openSans: "Open Sans", sans-serif;
+$lightBlue: rgba(221, 228, 235, 1);
 
 
 // Mixin for flexbox
@@ -15,4 +16,25 @@ $openSans: "Open Sans", sans-serif;
     flex-direction: $direction;
     justify-content: $justify;
     align-items: $align;
+}
+
+//Stylings to add to layout at Landscape mode
+@mixin landscapeSet {
+    @media screen and (orientation: landscape) {
+        @content;
+    }
+}
+
+//Styling for custom minimum width
+@mixin minWidth($arch) {
+    @media screen and (min-width: $arch) {
+        @content;
+    }
+}
+
+//Styling for custom maximum width
+@mixin maxWidth($arch) {
+    @media screen and (max-width: $arch) {
+        @content;
+    }
 }

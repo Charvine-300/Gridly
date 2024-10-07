@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <Header />
-        <Search v-if="showSearchbar" />
+        <Search />
         <slot />
     </div>
 </template>
@@ -10,14 +10,11 @@
 import Header from '~/components/Header.vue';
 import Search from '~/components/Search.vue';
 
-const searchStore = usePhotoStore();
-const { showSearchbar } = storeToRefs(searchStore);
-
 </script>
 
 <style lang="scss" scoped>
 .app-container {
-    min-height: 25vh;
+    min-height: 35vh;
     position: relative;
     background-color: $paleBlue;
 }
