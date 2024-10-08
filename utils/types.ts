@@ -13,6 +13,7 @@ export interface PhotosInterface {
     current_user_collections: CollectionInterface[];
     urls: UrlsInterface;
     links: PhotoLinksInterface;
+    slug: string;
   }
   
   export interface UserInterface {

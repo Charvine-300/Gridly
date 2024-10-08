@@ -5,8 +5,52 @@
     font-family: "Open Sans", sans-serif !important;
 }
 
+// Define the spin animation
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+// Define the fade-in-up animation
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px); // Start with the modal 50px lower
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0); // End at its original position
+    }
+}
+
 body {
     margin: 0;
     padding: 0;
     background-color: $white;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn {
+    padding: 15px 30px;
+    color: $white;
+    border-radius: 4px;
+    outline: none !important;
+    cursor: pointer;
+    display: block;
+    border: none;
+    background-color: $deepBlue;
+    font-weight: 700;
+    font-size: 1rem;
+  
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  
+  &:hover {
+    background-color: lighten($deepBlue, 10%);
+    transform: scale(1.05);
+  }
+  
 }

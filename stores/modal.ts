@@ -10,22 +10,21 @@ export const useModalStore = defineStore('Modal', {
     photo: "",
     title: "",
     location: "",
+    slug: "",
   }),
 
   // Actions: Methods that mutate the state or perform business logic
   actions: {
-    openModal(photo: string, title: string, location: string) {
+    openModal(photo: string, title: string, location: string, slug: string) {
       this.isModalOpen = true;
 
       this.photo = photo;
       this.title = title;
       this.location = location;
+      this.slug = slug;
     },
     closeModal() {
-      this.isModalOpen = false;
-      this.photo = "";
-      this.title = "";
-      this.location = "";
+      this.$reset();
     },
   },
 });

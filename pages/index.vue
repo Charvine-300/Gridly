@@ -4,7 +4,7 @@
 <img :src="item.urls.small" alt="" v-for="item in photos" :key="item.id" loading="lazy" @click="handleClick(item)" />
       </div>
       <div v-if="photos.length > 0 && photos.length < total">
-        <button class="load-more" @click="photoStore.loadMore"> Load more </button>
+        <button class="btn" @click="photoStore.loadMore()"> Load more </button>
       </div>
     </div>
 </template>
@@ -34,9 +34,7 @@ const modalStore = useModalStore();
 const openModal = modalStore.openModal;
 
 const handleClick = (item: PhotosInterface) => {
-  const name = `${item.user?.first_name} ${item.user?.last_name}`;
-
-  openModal(item.urls.regular, name, item.user.location);
+  openModal(item.urls.thumb, item.user.name, item.user.location, item.slug);
 };
 </script>
 
@@ -53,7 +51,6 @@ const handleClick = (item: PhotosInterface) => {
   margin: 3rem auto;
   columns: 1;
   column-gap: 30px;
-  grid-template-rows: masonry;
 
   img {
     width: 100%;
@@ -63,6 +60,8 @@ const handleClick = (item: PhotosInterface) => {
     break-inside: avoid;
     transition: all 0.3s ease;
     cursor: pointer;
+    transform: translateY(0);
+    animation: fadeInUp 0.5s ease-out;
 
     &:hover {
       transform: scale(1.05);
@@ -74,25 +73,7 @@ const handleClick = (item: PhotosInterface) => {
   }
 }
 
-.load-more {
-  padding: 15px 30px;
-  color: $white;
-  border-radius: 4px;
-  outline: none !important;
-  cursor: pointer;
-  display: block;
-  margin: 3rem auto;
-  border: none;
-  background-color: $deepBlue;
-  font-weight: 700;
-  font-size: 1rem;
-
-  transition: background-color 0.3s ease, transform 0.2s ease;
-
-&:hover {
-  background-color: lighten($deepBlue, 10%);
-  transform: scale(1.05);
-}
-
-}
+button {
+      margin: 3rem auto;
+    }
 </style>
