@@ -10,13 +10,14 @@ interface PhotoStore {
   photos: PhotosInterface[];
   total: number;
   downloadLoading: boolean;
+  moreLoading: boolean;
   searchTerm: string | undefined;
 }
 
 export const usePhotoStore = defineStore('Photos', {
     state: (): PhotoStore => ({
         showSearchbar: true,
-        loading: false,
+        loading: true,
         error: "",
         page: 1,
         perPage: 8,
@@ -24,6 +25,7 @@ export const usePhotoStore = defineStore('Photos', {
         photos: [],
         total: 0,
         downloadLoading: false,
+        moreLoading: false,
         searchTerm: undefined,
     }),
 
@@ -32,12 +34,14 @@ export const usePhotoStore = defineStore('Photos', {
     async fetchPhotos(term?: string, more = false) {
       // Reset error state
       this.error = ""; 
-      this.loading = true;
-
+    
       // Reset page
       if (!more) {
         this.page = 1;
         this.photos = [];
+        this.loading = true;
+      } else {
+        this.moreLoading = true;
       }
 
         if (term) {
@@ -53,24 +57,34 @@ export const usePhotoStore = defineStore('Photos', {
       try {
         const response = await axios.get(`/api/unsplash?search=${searchTerm}&page=${this.page}&perPage=${this.perPage}`);
         
-        // Store the fetched photos and stats in the store
-        this.total = response.data.total;
-
-        // Filter for necessary data
-        const existingPhotos = this.photos.map((photo) => {
-          return JSON.parse(JSON.stringify(photo)); // Resolving the proxy
-        });
-
-        // Condition to load more or change results
-        const mergedArray = [...existingPhotos, ...response.data.results];
-        this.photos = more ? mergedArray : response.data.results;
-
-        if (term) {
-          this.searchResultsHeading = `Search results for <span style="color: rgb(143, 164, 188); text-transform: capitalize;">"${term}"</span>`;
+        if (response.data.results.length > 0) {
+          // Store the fetched photos and stats in the store
+          this.total = response.data.total;
+  
+          // Filter for necessary data
+          const existingPhotos = this.photos.map((photo) => {
+            return JSON.parse(JSON.stringify(photo)); // Resolving the proxy
+          });
+  
+          // Condition to load more or change results
+          const mergedArray = [...existingPhotos, ...response.data.results];
+          this.photos = more ? mergedArray : response.data.results;
+  
+          if (term) {
+            this.searchResultsHeading = `Search results for <span style="color: rgb(143, 164, 188); text-transform: capitalize;">"${term}"</span>`;
+          }
+        } else {
+          this.error = `No photos found for "${searchTerm}". Try again.`;
+           // Return search bar for user to try again
+        this.showSearchbar = true;
         }
 
         this.loading = false;
+        this.moreLoading =false;
       } catch (error) {
+        this.loading = false;
+        this.moreLoading =false;
+
         console.error('Error fetching photos:', error);
         this.error = 'Failed to fetch photos';
         

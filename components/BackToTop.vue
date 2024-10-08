@@ -12,7 +12,7 @@
     }
   });
 
-  // Smooth scroll to top when the button is clicked
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -25,14 +25,12 @@
     right: 30px;
     padding: 10px;
     border-radius: 60px;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    // opacity: 0;
     transform: translateY(20px);
     z-index: 1000;
 
     img {
         width: 1.5rem;
-        height: 1.5rem;
+        height: 1.2rem;
     }
   
     &.show {

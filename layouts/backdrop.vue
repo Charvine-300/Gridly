@@ -34,8 +34,14 @@ const showButton = ref(false);
 
 <style lang="scss" scoped>
 .app-container {
-    min-height: 35vh;
+  min-height: 400px;
+    max-height: 600px;
     position: relative;
     background-color: $paleBlue;
-}
+
+    @include landscapeSet {
+      min-height: 300px;
+    }
+  }
+
 </style>

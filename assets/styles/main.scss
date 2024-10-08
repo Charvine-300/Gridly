@@ -15,12 +15,22 @@
 @keyframes fadeInUp {
     from {
       opacity: 0;
-      transform: translateY(50px); // Start with the modal 50px lower
+      transform: translateY(50px);
     }
     to {
       opacity: 1;
-      transform: translateY(0); // End at its original position
+      transform: translateY(0);
     }
+}
+
+/* Spin animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 body {
@@ -52,5 +62,30 @@ a {
     background-color: lighten($deepBlue, 10%);
     transform: scale(1.05);
   }
-  
+}
+
+.masonry {
+  width: 80%;
+  min-height: 20vh;
+  max-width: 1224px;
+  margin: 3rem auto;
+  columns: 1;
+  column-gap: 30px;
+
+  .card-container {
+    cursor: pointer;
+    border-radius: 5px;
+    transform: translateY(0);
+    break-inside: avoid;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  @include landscapeSet {
+    columns: 3;
+  }
 }

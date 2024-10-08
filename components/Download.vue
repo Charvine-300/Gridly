@@ -3,7 +3,7 @@
 <div class="photo-modal">
   <img src="/assets/icons/close.svg" alt="close icon" class="close-img" @click="closeModal" />
 <div class="full-img">
-    <img :src="photo" :alt="title" loading="lazy" />
+    <img :src="photo" :alt="title" loading="eager" />
 </div>
 <div class="image-details-container">
 <div>
@@ -69,6 +69,7 @@ right: 0;
 
   .full-img {
     width: fit-content;
+    min-height: 130px;
     margin: 1.5rem auto;
   }
 

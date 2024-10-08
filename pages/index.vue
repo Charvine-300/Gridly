@@ -1,19 +1,35 @@
 <template>
     <div class="grid-container">
-      <div class="masonry">
-<img :src="item.urls.small" alt="" v-for="item in photos" :key="item.id" loading="lazy" @click="handleClick(item)" />
+      <LoadingCards v-if="loading" />
+      <div v-else-if="!loading && photos.length > 0">
+        <div class="masonry">
+          <div class="card-container" v-for="item in photos" :key="item.id" @click="handleClick(item)" >
+            <!-- <img :src="item.urls.small" alt=""  loading="eager" /> -->
+             <Card :img="item.urls.small" :title="item.user.name" :location="item.user.location" />
+          </div>
+        </div>
+        <div v-if="photos.length > 0 && photos.length < total">
+          <button class="btn" @click="photoStore.loadMore()">
+      <Spinner v-if="moreLoading" />
+      <span v-if="!moreLoading">Load more</span>
+    </button>
+        </div>
       </div>
-      <div v-if="photos.length > 0 && photos.length < total">
-        <button class="btn" @click="photoStore.loadMore()"> Load more </button>
+      <div class="error" v-if="error"> 
+<img src="/assets/icons/error.svg" alt="error icon" />
+<p> {{ error }} </p>
       </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import Card from '~/components/ui/Card.vue';
+import Spinner from '~/components/ui/Spinner.vue';
+import LoadingCards from '~/components/ui/LoadingCards.vue';
 import type { PhotosInterface } from '~/utils/types';
 
 const photoStore = usePhotoStore();
-const { error, photos, total } = storeToRefs(photoStore);
+const { error, photos, total, loading, moreLoading } = storeToRefs(photoStore);
 
 // Page title
 useHead({
@@ -45,32 +61,22 @@ const handleClick = (item: PhotosInterface) => {
     margin: 0 auto;
 }
 
-.masonry {
-  width: 80%;
-  max-width: 1224px;
-  margin: 3rem auto;
-  columns: 1;
-  column-gap: 30px;
+.error {
+min-height: 70vh;
+@include flexboxWrap(column, center, center);
 
-  img {
-    width: 100%;
-    display: block;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    break-inside: avoid;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    transform: translateY(0);
-    animation: fadeInUp 0.5s ease-out;
+img {
+  display: block;
+  margin: 0 auto;
+ width: 60%;
+ max-width: 400px;
+}
 
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-
-  @include landscapeSet {
-    columns: 3;
-  }
+p {
+  margin: 0;
+  color: $navyBlue;
+  font-weight: 700;
+}
 }
 
 button {
