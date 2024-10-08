@@ -1,6 +1,7 @@
 # Gridly
 
 Gridly is a mini unsplash clone built with Nuxt, Pinia, Unsplash Developers API, and SCSS.
+![Screenshot_8-10-2024_124423_localhost](https://github.com/user-attachments/assets/d8c174a4-6749-4775-bbf5-bec3186ff154)
 
 
 ## Pre-requisites
