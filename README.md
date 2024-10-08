@@ -71,7 +71,7 @@ Deployed on Vercel - a continuous deployment and hosting service that simplifies
 
 ## Contributors
 
-| Role s            | People                                                   |
+| Roles            | People                                                   |
 | ---------------- | -------------------------------------------------------- |
 | Code 💻          | Chidera Ezenwekwe                            |
 | Maintenance 🛠   | Chidera Ezenwekwe |
